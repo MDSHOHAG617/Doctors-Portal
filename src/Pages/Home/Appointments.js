@@ -12,7 +12,11 @@ const Appointments = () => {
       className="flex justify-center my-20 lg:items-center sm:items-center lg:my-52"
     >
       <div className="flex-1">
-        <img className="mt-[-150px] hidden lg:block " src={doctor} alt="" />
+        <img
+          className="mt-[-150px] hidden md:block lg:block "
+          src={doctor}
+          alt=""
+        />
       </div>
       <div className="flex-1 p-4 text-white sm:mx-auto">
         <h3 className="text-3xl font-bold text-primary">Appointment</h3>
