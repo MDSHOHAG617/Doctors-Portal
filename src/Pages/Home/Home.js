@@ -11,7 +11,6 @@ import Testimonials from "./Testimonials";
 const Home = () => {
   return (
     <div className="px-12">
-      <h2>this is home</h2>
       <Banner></Banner>
       <Info></Info>
       <Services></Services>

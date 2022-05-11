@@ -34,7 +34,7 @@ const ContactUs = () => {
           ></textarea>
         </div>
         <button className="btn uppercase font-bold text-white btn-primary bg-gradient-to-r from-secondary to-primary mt-5">
-          Get Started
+          Submit
         </button>
       </div>
     </section>
