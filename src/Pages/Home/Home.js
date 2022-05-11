@@ -1,9 +1,12 @@
 import React from "react";
 import Appointments from "./Appointments";
 import Banner from "./Banner";
+import ContactUs from "./ContactUs";
+import Footer from "./Footer";
 import Info from "./Info";
 import SecondBanner from "./SecondBanner";
 import Services from "./Services";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
   return (
@@ -14,6 +17,9 @@ const Home = () => {
       <Services></Services>
       <SecondBanner></SecondBanner>
       <Appointments></Appointments>
+      <Testimonials></Testimonials>
+      <ContactUs></ContactUs>
+      <Footer></Footer>
     </div>
   );
 };
