@@ -14,7 +14,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_STORAGE_BUCKET,
   appId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
-console.log(firebaseConfig);
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
