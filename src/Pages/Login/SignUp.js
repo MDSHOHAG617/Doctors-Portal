@@ -8,8 +8,7 @@ import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
 import { Link, useNavigate } from "react-router-dom";
-import { async } from "@firebase/util";
-import { useNavigation } from "react-day-picker";
+import useToken from "../../Hooks/useToken";
 
 const SignUp = () => {
   const [gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -24,11 +23,14 @@ const SignUp = () => {
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+  const [token] = useToken(gUser || user);
+
   const navigate = useNavigate();
   let signInError;
 
-  if (gUser || user) {
-    console.log(gUser || user);
+  if (token) {
+    // console.log(gUser || user);
+    navigate("/appointment");
   }
   if (loading || gLoading || updating) {
     return <Loading></Loading>;
@@ -44,11 +46,10 @@ const SignUp = () => {
   }
   const onSubmit = async (data, event) => {
     event.preventDefault();
-    console.log(data);
+    // console.log(data);
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    console.log("update done");
-    navigate("/appointment");
+    // console.log("update done");
   };
 
   return (
