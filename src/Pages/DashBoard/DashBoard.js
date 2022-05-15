@@ -25,6 +25,12 @@ const DashBoard = () => {
             <Link className=" font-bold " to="/dashboard/review">
               My reviews
             </Link>
+            <Link className=" font-bold " to="/dashboard/history">
+              My History
+            </Link>
+            <Link className=" font-bold " to="/dashboard/users">
+              All users
+            </Link>
           </li>
         </ul>
       </div>
