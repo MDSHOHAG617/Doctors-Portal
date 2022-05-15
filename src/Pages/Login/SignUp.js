@@ -8,10 +8,10 @@ import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
 import { Link, useNavigate } from "react-router-dom";
-import useToken from "../../Hooks/useToken";
+import useToken from "../../hooks/useToken";
 
 const SignUp = () => {
-  const [gUser, gLoading, gError] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const {
     register,
     formState: { errors },
@@ -23,15 +23,11 @@ const SignUp = () => {
 
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-  const [token] = useToken(gUser || user);
+  const [token] = useToken(user || gUser);
 
   const navigate = useNavigate();
   let signInError;
 
-  if (token) {
-    // console.log(gUser || user);
-    navigate("/appointment");
-  }
   if (loading || gLoading || updating) {
     return <Loading></Loading>;
   }
@@ -44,6 +40,10 @@ const SignUp = () => {
       </p>
     );
   }
+  if (token) {
+    navigate("/appointment");
+  }
+
   const onSubmit = async (data, event) => {
     event.preventDefault();
     // console.log(data);
@@ -164,7 +164,12 @@ const SignUp = () => {
           </p>
           <div className="divider">OR</div>
 
-          <button className="btn btn-outline">Continue With Google</button>
+          <button
+            onClick={() => signInWithGoogle()}
+            className="btn btn-outline"
+          >
+            Continue With Google
+          </button>
         </div>
       </div>
     </div>

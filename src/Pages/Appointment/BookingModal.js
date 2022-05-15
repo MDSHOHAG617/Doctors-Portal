@@ -13,7 +13,7 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
   const handleBooking = (event) => {
     event.preventDefault();
     const slot = event.target.slot.value;
-    console.log(slot, name, _id);
+    // console.log(slot, name, _id);
 
     const booking = {
       treatmentId: _id,
@@ -36,13 +36,12 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
       .then((data) => {
         console.log(data);
         if (data.success) {
-          toast(
-            `Appointment is set, ${formattedDate} at ${data.booking?.slot}`
-          );
+          toast(`Appointment is set, ${formattedDate} at ${slot}`);
         } else {
           toast.error(
-            `already have an Appointment on, ${data.booking?.data} at ${slot}`
+            `already have an Appointment on, ${data.booking?.date} at ${slot}`
           );
+          console.log(data.booking);
         }
         refetch();
         setTreatment(null);
