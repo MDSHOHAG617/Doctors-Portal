@@ -16,16 +16,16 @@ const AvailableAppointments = ({ date }) => {
     isLoading,
     refetch,
   } = useQuery(["available", formattedDate], () =>
-    fetch(`http://localhost:5000/available?date=${formattedDate}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://intense-fjord-49146.herokuapp.com/available?date=${formattedDate}`
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading></Loading>;
   }
   // useEffect(() => {
   //   // fetch("service.json")
-  //   fetch(`http://localhost:5000/available?date=${formattedDate}`)
+  //   fetch(`https://intense-fjord-49146.herokuapp.com/available?date=${formattedDate}`)
   //     .then((res) => res.json())
   //     .then((data) => setServices(data));
   // }, [formattedDate]);
