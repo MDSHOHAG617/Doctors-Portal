@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const MyAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [user] = useAuthState(auth);
-  console.log(appointments);
+  // console.log(appointments);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +22,6 @@ const MyAppointments = () => {
         }
       )
         .then((res) => {
-          console.log("res", res);
           if (res.status === 401 || res.status === 403) {
             signOut(auth);
             localStorage.removeItem("accessToken");
@@ -31,7 +30,7 @@ const MyAppointments = () => {
           return res.json();
         })
         .then((data) => {
-          console.log(data);
+          // console.log(data);
           setAppointments(data);
         });
     }
@@ -49,6 +48,7 @@ const MyAppointments = () => {
               <th>Date</th>
               <th>Time</th>
               <th>Treatment</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +59,24 @@ const MyAppointments = () => {
                 <td>{appointment.date}</td>
                 <td>{appointment.slot}</td>
                 <td>{appointment.treatment}</td>
+                <td>
+                  {appointment.price && !appointment.paid && (
+                    <Link to={`/dashboard/payment/${appointment._id}`}>
+                      <button className="btn btn-xs btn-success">pay</button>
+                    </Link>
+                  )}
+                  {appointment.price && appointment.paid && (
+                    <div>
+                      <p>
+                        <span className=" text-success">Paid</span>
+                      </p>
+                      <p>
+                        Transaction Id:{" "}
+                        <span className="text-success">{appointment._id} </span>
+                      </p>
+                    </div>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
